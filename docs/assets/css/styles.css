@@ -1,0 +1,13 @@
+.selected {
+  color: green;
+  text-decoration: none;
+  bottom-margin: 0.5em;
+}
+
+.unselected {
+  color: black;
+  text-decoration: none;
+  bottom-margin: 0.5em;
+}
+
+/*# sourceMappingURL=styles.css.map */
