@@ -23,7 +23,7 @@ def main(date: datetime.datetime, docx_path: pathlib.Path):
     compact_date = date.strftime("%Y%m%d")
     link_date = date.strftime("%b_%d_%Y")
     read_date = date.strftime("%b %d, %Y")
-    html = f"{compact_date}.html"
+    html = f"{link_date}.html"
 
     # Run pandoc
     cmd = f'pandoc --extract-media images/{compact_date} -o {html} "{docx_path}"'
