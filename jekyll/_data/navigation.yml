@@ -1,5 +1,7 @@
 - name: Welcome
   link: /
+- name: Introduction
+  link: /introduction.html
 - name: May 07, 1946
   link: /May_07_1946.html
 - name: May 13, 1946
