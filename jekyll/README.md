@@ -1,13 +1,16 @@
 # Import process
 
-1. Run ingest.py from this directory. Here is an example:
-```
-python3 ./ingest_docx.py --date 19460520 --docx ../../RawDocx/CBF\ \#3_\ May\ 20,\ 1946.docx
-```
-2. `bundle exec jekyll serve` to build and spot check. `build` instead of `serve` to only build.
-3. mv ./_sites to ../docs
+Relevant scripts: `generate_ingest_cmds.py`, `ingest_docx.py`, `run.sh`.
+
+This should be more automated but but here is the current process:
+
+1. Open `generate_ingest_cmds.py`. Edit the top 2 variables `path` and `files`.
+2. Run `generate_ingest_cmds.py` to generate the ingest commands. Copy and paste this output to `run.sh`.
+3. Run `run.sh` to ingest the files.
+4. `bundle exec jekyll serve` to build and spot check. `build` instead of `serve` to only build.
+5. mv ./_sites to ../docs
+    * Before doing the `mv` the .py and .sh files and the README.md file should be deleted from the _sites directory.
 
 # To do
 
-1. Redo first 2 blogs with google external links
-2. organize html files so they don't live at top level
+1. organize html files so they don't live at top level
