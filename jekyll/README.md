@@ -1,9 +1,10 @@
 # Import process
 
-Relevant scripts: `generate_ingest_cmds.py`, `ingest_docx.py`, `run.sh`.
+Relevant scripts: `download_email.py`, `generate_ingest_cmds.py`, `ingest_docx.py`, `run.sh`.
 
 This should be more automated but but here is the current process:
 
+1. Download emails attachments using `download_email.py`.
 1. Open `generate_ingest_cmds.py`. Edit the top 2 variables `path` and `files`.
 2. Run `generate_ingest_cmds.py` to generate the ingest commands. Copy and paste this output to `run.sh`.
 3. Run `run.sh` to ingest the files.
