@@ -33,19 +33,28 @@ def authenticate():
             token.write(creds.to_json())
     return creds
 
-def get_message_id(service, user_id='me', subject=''):
-    """Return id of the first email matching the subject."""
+def get_message_ids(service, user_id='me', subject=''):
+    """Return ids of all emails matching the subject in the inbox."""
     try:
+        query = f'in:inbox subject:"{subject}"'
         response = service.users().messages().list(userId=user_id,
-                                                   q=f'subject:"{subject}"').execute()
+                                                   q=query).execute()
         messages = []
         if 'messages' in response:
             messages.extend(response['messages'])
 
-        for message in messages[:1]:  # Limit to first email
-            return message['id']
+            # Get any additional pages of results
+            while 'nextPageToken' in response:
+                page_token = response['nextPageToken']
+                response = service.users().messages().list(userId=user_id,
+                                                       q=query,
+                                                       pageToken=page_token).execute()
+                messages.extend(response['messages'])
+
+        return [message['id'] for message in messages]
     except HttpError as error:
         print(f'An error occurred: {error}')
+        return []
 
 def download_attachments(service, user_id='me', msg_id=''):
     """Download attachments from a specified message."""
@@ -99,13 +108,14 @@ def main():
     service = build('gmail', 'v1', credentials=creds)
     
     subject = sys.argv[1]
-    #subject = input("Enter the email subject to search for attachments: ")
-    msg_id = get_message_id(service, subject=subject)
+    msg_ids = get_message_ids(service, subject=subject)
     
-    if msg_id:
-        download_attachments(service, msg_id=msg_id)
+    if msg_ids:
+        print(f"Found {len(msg_ids)} matching emails. Downloading attachments...")
+        for msg_id in msg_ids:
+            download_attachments(service, msg_id=msg_id)
     else:
-        print(f"No email found with subject: {subject}")
+        print(f"No emails found with subject: {subject}")
 
 if __name__ == '__main__':
     main()
