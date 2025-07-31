@@ -1,13 +1,10 @@
-.sidebar nav a.selected {
+.selected {
   color: green;
   text-decoration: none;
   bottom-margin: 0.5em;
-  background-color: #d4edda;
-  border-left: 3px solid green;
-  padding: 2px 4px;
 }
 
-.sidebar nav a.unselected {
+.unselected {
   color: black;
   text-decoration: none;
   bottom-margin: 0.5em;
@@ -75,8 +72,10 @@
 /* Container and layout styles */
 .container {
   display: flex; /* Use flexbox layout */
+  min-height: 100vh;
 }
 
+/* Sidebar styling */
 .sidebar {
   flex: 0 0 auto; /* Let the sidebar size to its content */
   min-width: 180px; /* Minimum width to accommodate "Clarence Dirks & the UW" */
@@ -86,9 +85,15 @@
   margin-top: 1em;
 }
 
+/* Content area */
 .content {
   flex: 1; /* Fill the remaining space with the main content */
   background-color: white;
 }
 
-/*# sourceMappingURL=styles.css.map */
+/* Selected link highlighting */
+.sidebar nav a.selected {
+  background-color: #d4edda;
+  border-left: 3px solid green;
+  padding: 2px 4px;
+}

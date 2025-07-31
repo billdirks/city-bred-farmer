@@ -42,7 +42,10 @@
     function highlightCurrentPage() {
         const navLinks = document.querySelectorAll('.sidebar nav a');
         navLinks.forEach(link => {
-            if (link.href && link.href.includes(currentPage)) {
+            // Extract the pathname from the link href
+            const linkPath = new URL(link.href, window.location.origin).pathname;
+            
+            if (linkPath === currentPage) {
                 link.classList.remove('unselected');
                 link.classList.add('selected');
             } else {
