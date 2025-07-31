@@ -1,10 +1,13 @@
-.selected {
+.sidebar nav a.selected {
   color: green;
   text-decoration: none;
   bottom-margin: 0.5em;
+  background-color: #d4edda;
+  border-left: 3px solid green;
+  padding: 2px 4px;
 }
 
-.unselected {
+.sidebar nav a.unselected {
   color: black;
   text-decoration: none;
   bottom-margin: 0.5em;
@@ -67,12 +70,6 @@
 
 .sidebar nav a:hover {
   background-color: #e0e0e0;
-}
-
-.sidebar nav a.selected {
-  background-color: #d4edda;
-  border-left: 3px solid green;
-  padding: 2px 4px;
 }
 
 /* Container and layout styles */
