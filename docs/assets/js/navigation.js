@@ -23,6 +23,24 @@
             }
         }
     }
+
+    // Ensure selected link is visible inside the sidebar without unnecessary scrolling
+    function ensureSelectedVisible() {
+        const sidebar = document.querySelector('.sidebar');
+        if (!sidebar) return;
+        const selected = sidebar.querySelector('nav a.selected');
+        if (!selected) return;
+        const sidebarRect = sidebar.getBoundingClientRect();
+        const selectedRect = selected.getBoundingClientRect();
+        const padding = 2; // small tolerance for borders/subpixel
+
+        // If selected is above, align to start; if below, align to end
+        if (selectedRect.top < sidebarRect.top + padding) {
+            selected.scrollIntoView({ block: 'start' });
+        } else if (selectedRect.bottom > sidebarRect.bottom - padding) {
+            selected.scrollIntoView({ block: 'end' });
+        }
+    }
     
     // Function to handle navigation clicks
     function handleNavigationClick(event) {
@@ -62,6 +80,9 @@
         
         // Highlight current page
         highlightCurrentPage();
+
+        // Make sure the selected item is visible if near edges
+        ensureSelectedVisible();
         
         // Add click event listeners to navigation links
         const sidebar = document.querySelector('.sidebar');
